@@ -6,17 +6,16 @@ Summary:	Real Time Software Video/Audio Encoder library
 Summary(pl):	Programowa biblioteka kodera audio/wideo czasu rzeczywistego
 Name:		rte
 Version:	%{_rte_version}
-Release:	2
+Release:	3
 License:	GPL
 Group:		Libraries
 Source0:	http://prdownloads.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
 URL:		http://zapping.sf.net/
 BuildRequires:	esound-devel
 BuildRequires:	XFree86-devel
-%ifnarch sparc spar64 ppc
 BuildRequires:	alsa-lib-devel
 BuildRequires:	nasm
-%endif
+ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
