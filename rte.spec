@@ -8,13 +8,6 @@ Version:	%{_rte_version}
 Release:	1
 License:	GPL
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Source0:	http://prdownloads.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
 URL:		http://zapping.sf.net/
 BuildRequires:	esound-devel
@@ -35,13 +28,6 @@ Programowa biblioteka kodera audio/wideo czasu rzeczywistego.
 Summary:	rte library development files
 Summary(pl):	Pliki programistyczne biblioteki rte
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -54,13 +40,6 @@ Pliki programistyczne biblioteki rte.
 Summary:	rte static library
 Summary(pl):	Biblioteka statyczna rte
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -73,9 +52,6 @@ Pliki programistyczne biblioteki rte.
 Summary:	Realtime MPEG-1 audio/video encoder
 Summary(pl):	Koder audio/wideo MPEG-1 czasu rzeczywistego
 Group:		Applications/Graphics
-Group(de):	Applikationen/Grafik
-Group(pl):	Aplikacje/Grafika
-Group(pt):	AplicaГУes/GrАficos
 Version:	%{_mp1e_version}
 Requires:	rte
 
