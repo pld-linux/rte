@@ -1,0 +1,81 @@
+--- rte-0.4/configure.in~	Sun Nov 25 22:57:27 2001
++++ rte-0.4/configure.in	Sat Apr 20 11:18:17 2002
+@@ -12,23 +12,11 @@
+ AC_SUBST(AS)
+ AC_SUBST(ASFLAGS)
+ 
+-dnl Stupid rpm in SuSE
+-CFLAGS="-g -O2 -Wall -fomit-frame-pointer"
+-
+ AM_PROG_LIBTOOL
+ 
+-test -e site_def.h || cat <<EOF >site_def.h
+-/* Site specific definitions */
+-
+-#ifndef SITE_DEF_H
+-#define SITE_DEF_H
+-#if 1 /* EXISTS */
+-#endif /* EXISTS */
+-#endif /* SITE_DEF_H */
+-EOF
+-
+-AC_CHECK_HEADER(linux/soundcard.h,AC_DEFINE(OSS, 1,
+-					    [Define if you have linux/soundcard.h]))
++AC_CHECK_HEADER(linux/soundcard.h,
++	[AC_DEFINE(OSS, 1, [Define if you have linux/soundcard.h])]
++)
+ 
+ AC_MSG_CHECKING(for EsounD)
+ ESD_VERSION=`esd-config --version`
+@@ -48,18 +36,8 @@
+ 
+ AC_OUTPUT([
+ Makefile
+-dnl ffmpeg/Makefile
+-dnl ffmpeg/libav/Makefile
+-dnl ffmpeg/libavcodec/Makefile
+-dnl ffmpeg/libavcodec/i386/Makefile
+-dnl ffmpeg/libavcodec/mpglib/Makefile
+-dnl ffmpeg/libavcodec/libac3/Makefile
+ rte.spec
+ ])
+ 
+ dnl Finish the config
+-cd mp1e
+-./configure
+-echo "Type 'make' to compile rte. You can run './configure' under "
+-echo "the 'mp1e' dir to pass any special options to the mp1e "
+-echo "backend."
++AC_CONFIG_SUBDIRS(mp1e)
+--- rte-0.4/mp1e/configure.in~	Sat Apr 20 11:24:26 2002
++++ rte-0.4/mp1e/configure.in	Sat Apr 20 11:24:26 2002
+@@ -14,8 +14,6 @@
+ 
+ AM_PROG_LIBTOOL
+ 
+-AM_ACLOCAL_INCLUDE(macros)
+-
+ test -e site_def.h || cat <<EOF >site_def.h
+ /* Site specific definitions */
+ 
+@@ -46,11 +44,6 @@
+ "decoder.h decoder.c hamm.h hamm.c sliced.h tables.h tables.c v4lx.h v4lx.c"
+ create_links .. . "rte.h rtepriv.h"
+ 
+-AC_ARG_ENABLE(debugging, [  --enable-debugging      add debugging info],
+-        [CFLAGS="-Wall -O0 -g -fomit-frame-pointer"
+-	 AC_DEFINE(ENABLE_DEBUGGING, 1, [Add debugging info])],
+-        CFLAGS="-Wall -O2 -fomit-frame-pointer")
+-
+ AC_CHECK_FUNCS(memalign)
+ AC_CHECK_FUNCS(program_invocation_name)
+ 
+@@ -89,7 +82,7 @@
+ dnl ALSA support (libasound)
+ dnl
+ have_libasound=no
+-AM_PATH_ALSA_([0.5.9], have_libasound=yes, true)
++AM_PATH_ALSA([0.5.9], have_libasound=yes, true)
+ 
+ dnl
+ dnl EsounD support
