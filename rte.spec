@@ -2,15 +2,18 @@ Summary:	Real Time Software Video/Audio Encoder library
 Summary(pl):	Programowa biblioteka kodera audio/wideo czasu rzeczywistego
 Name:		rte
 Version:	0.4
-Release:	3
+Release:	4
 License:	GPL
 Group:		Libraries
 Source0:	http://prdownloads.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
-Patch0:		rte-ac_fixes.patch
+Patch0:		%{name}-ac_fixes.patch
 URL:		http://zapping.sf.net/
 BuildRequires:	XFree86-devel
 BuildRequires:	alsa-lib-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	esound-devel
+BuildRequires:	libtool
 BuildRequires:	nasm
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -43,14 +46,14 @@ Requires:	%{name}-devel = %{version}
 rte static library.
 
 %description static -l pl
-Pliki programistyczne biblioteki rte.
+Statyczna biblioteka rte.
 
 %package -n mp1e
 Summary:	Realtime MPEG-1 audio/video encoder
 Summary(pl):	Koder audio/wideo MPEG-1 czasu rzeczywistego
 Group:		Applications/Graphics
 Version:	1.9.2
-Requires:	rte
+Requires:	%{name} = %{version}
 
 %description -n mp1e
 Realtime MPEG-1 audio/video encoder.
@@ -65,14 +68,14 @@ Koder audio/wideo MPEG-1 czasu rzeczywistego.
 %build
 rm -f missing
 %{__libtoolize}
-aclocal
+%{__aclocal}
 %{__autoconf}
 %{__automake}
 %configure
 cd mp1e
 rm -f missing
 %{__libtoolize}
-aclocal -I %{_aclocaldir}/gnome
+%{__aclocal} -I %{_aclocaldir}/gnome
 %{__autoconf}
 %{__automake}
 %configure
@@ -87,8 +90,6 @@ rm -rf $RPM_BUILD_ROOT
 	bindir=%{_bindir} \
 	man1dir=%{_mandir}/man1
 
-gzip -9nf AUTHORS NEWS README ChangeLog
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -97,12 +98,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc [ANR]*.gz
+%doc AUTHORS NEWS README
 %attr(755,root,root) %{_libdir}/librte-*.so
 
 %files devel
 %defattr(644,root,root,755)
-%doc ChangeLog.gz
+%doc ChangeLog
 %attr(755,root,root) %{_libdir}/librte.??
 %{_includedir}/rte.h
 
