@@ -1,12 +1,11 @@
 Summary:	Real Time Software Video/Audio Encoder library
 Summary(pl):	Programowa biblioteka kodera audio/wideo czasu rzeczywistego
 Name:		rte
-Version:	0.4
-Release:	4
+Version:	0.5
+Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://prdownloads.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
-Patch0:		%{name}-ac_fixes.patch
 URL:		http://zapping.sf.net/
 BuildRequires:	XFree86-devel
 BuildRequires:	alsa-lib-devel
@@ -15,6 +14,7 @@ BuildRequires:	automake
 BuildRequires:	esound-devel
 BuildRequires:	libtool
 BuildRequires:	nasm
+BuildRequires:	divx4linux-devel
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -48,47 +48,21 @@ rte static library.
 %description static -l pl
 Statyczna biblioteka rte.
 
-%package -n mp1e
-Summary:	Realtime MPEG-1 audio/video encoder
-Summary(pl):	Koder audio/wideo MPEG-1 czasu rzeczywistego
-Group:		Applications/Graphics
-Version:	1.9.2
-Requires:	%{name} = %{version}
-
-%description -n mp1e
-Realtime MPEG-1 audio/video encoder.
-
-%description -n mp1e -l pl
-Koder audio/wideo MPEG-1 czasu rzeczywistego.
-
 %prep
 %setup  -q
-%patch0 -p1
 
 %build
-rm -f missing
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__automake}
-%configure
-cd mp1e
-rm -f missing
-%{__libtoolize}
-%{__aclocal} -I %{_aclocaldir}/gnome
-%{__autoconf}
-%{__automake}
-%configure
-cd ..
+%configure \
+	CPPFLAGS="-I%{_includedir}/divx"
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	bindir=%{_bindir} \
-	man1dir=%{_mandir}/man1
+	DESTDIR=$RPM_BUILD_ROOT
+
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -96,22 +70,18 @@ rm -rf $RPM_BUILD_ROOT
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README
-%attr(755,root,root) %{_libdir}/librte-*.so
+%attr(755,root,root) %{_libdir}/lib*.so.*
 
 %files devel
 %defattr(644,root,root,755)
 %doc ChangeLog
-%attr(755,root,root) %{_libdir}/librte.??
-%{_includedir}/rte.h
+%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.la
+%{_includedir}/*.h
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/librte.a
-
-%files -n mp1e
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
-%{_mandir}/*/*
+%{_libdir}/lib*.a
