@@ -5,7 +5,7 @@ Version:	0.5
 Release:	1
 License:	GPL
 Group:		Libraries
-Source0:	http://prdownloads.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/zapping/%{name}-%{version}.tar.bz2
 URL:		http://zapping.sf.net/
 BuildRequires:	XFree86-devel
 BuildRequires:	alsa-lib-devel
@@ -14,8 +14,6 @@ BuildRequires:	automake
 BuildRequires:	esound-devel
 BuildRequires:	libtool
 BuildRequires:	nasm
-BuildRequires:	divx4linux-devel
-ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -52,8 +50,7 @@ Statyczna biblioteka rte.
 %setup  -q
 
 %build
-%configure \
-	CPPFLAGS="-I%{_includedir}/divx"
+%configure --without-divx4linux
 %{__make}
 
 %install
