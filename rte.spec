@@ -1,4 +1,5 @@
 #
+# Conditional build:
 %bcond_without	mp1e	# without MP1E backend
 #
 %ifnarch %{ix86}
@@ -33,7 +34,8 @@ Programowa biblioteka kodera audio/wideo czasu rzeczywistego.
 Summary:	rte library development files
 Summary(pl):	Pliki programistyczne biblioteki rte
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
+%{?with_mp1e:Requires:	mp1e-devel >= 1.9.3}
 
 %description devel
 rte library development files.
@@ -45,7 +47,7 @@ Pliki programistyczne biblioteki rte.
 Summary:	rte static library
 Summary(pl):	Biblioteka statyczna rte
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 rte static library.
