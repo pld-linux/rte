@@ -97,14 +97,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/librte-%{_rte_version}.so
 %doc [ANR]*.gz
+%attr(755,root,root) %{_libdir}/librte-*.so
 
 %files devel
 %defattr(644,root,root,755)
+%doc ChangeLog.gz
 %attr(755,root,root) %{_libdir}/librte.??
 %{_includedir}/rte.h
-%doc ChangeLog.gz
 
 %files static
 %defattr(644,root,root,755)
