@@ -64,14 +64,14 @@ Koder audio/wideo MPEG-1 czasu rzeczywistego.
 
 %build
 rm -f missing
-libtoolize --copy --force
+%{__libtoolize}
 aclocal
 %{__autoconf}
 %{__automake}
 %configure
 cd mp1e
 rm -f missing
-libtoolize --copy --force
+%{__libtoolize}
 aclocal -I %{_aclocaldir}/gnome
 %{__autoconf}
 %{__automake}
