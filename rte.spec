@@ -57,7 +57,7 @@ Statyczna biblioteka rte.
     --without-mp1e \
     --without-ffmpeg
 %endif
-    
+
 %{__make}
 
 %install
