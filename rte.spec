@@ -1,4 +1,4 @@
-%define		_rte_version	0.3.1
+%define		_rte_version	0.4
 %define		_mp1e_version	1.9.1
 
 Summary:	Real Time Software Video/Audio Encoder library
