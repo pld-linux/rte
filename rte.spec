@@ -5,7 +5,7 @@ Version:	0.5.1
 Release:	1
 License:	GPL
 Group:		Libraries
-Source0:	http://prdownloads.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
+Source0:	http://dl.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
 URL:		http://zapping.sf.net/
 BuildRequires:	XFree86-devel
 BuildRequires:	alsa-lib-devel
