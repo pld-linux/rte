@@ -1,11 +1,12 @@
 %define		_rte_version	0.4
-%define		_mp1e_version	1.9.1
+# when upgrading, update the following from rte-%{version}/mp1e/configure.in
+%define		_mp1e_version	1.9.2
 
 Summary:	Real Time Software Video/Audio Encoder library
 Summary(pl):	Programowa biblioteka kodera audio/wideo czasu rzeczywistego
 Name:		rte
 Version:	%{_rte_version}
-Release:	1
+Release:	2
 License:	GPL
 Group:		Libraries
 Source0:	http://prdownloads.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
