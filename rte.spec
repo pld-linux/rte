@@ -15,12 +15,14 @@ Group(pl):	Biblioteki
 Group(pt_BR):	Bibliotecas
 Group(ru):	Библиотеки
 Group(uk):	Б╕бл╕отеки
-URL:		http://zapping.sf.net/
 Source0:	http://prdownloads.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
+URL:		http://zapping.sf.net/
 BuildRequires:	esound-devel
 BuildRequires:	XFree86-devel
+%ifnarch sparc spar64 ppc
 BuildRequires:	alsa-lib-devel
 BuildRequires:	nasm
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -43,10 +45,10 @@ Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
-rte library development files
+rte library development files.
 
 %description devel -l pl
-Pliki programistyczne biblioteki rte
+Pliki programistyczne biblioteki rte.
 
 %package static
 Summary:	rte static library
@@ -62,7 +64,7 @@ Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
-rte static library
+rte static library.
 
 %description static -l pl
 Pliki programistyczne biblioteki rte.
@@ -78,10 +80,10 @@ Version:	%{_mp1e_version}
 Requires:	rte
 
 %description -n mp1e
-Realtime MPEG-1 audio/video encoder
+Realtime MPEG-1 audio/video encoder.
 
 %description -n mp1e -l pl
-Koder audio/wideo MPEG-1 czasu rzeczywistego
+Koder audio/wideo MPEG-1 czasu rzeczywistego.
 
 %prep
 %setup  -q
@@ -96,18 +98,17 @@ cd ..
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} \
+%{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	bindir=%{_bindir} \
-	man1dir=%{_mandir}/man1 \
-	install
+	man1dir=%{_mandir}/man1
 
 gzip -9nf AUTHORS NEWS README ChangeLog
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
+%post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files
