@@ -1,5 +1,5 @@
-%define		_rte_version	0.3
-%define		_mp1e_version	1.9
+%define		_rte_version	0.3.1
+%define		_mp1e_version	1.9.1
 
 Summary:	Real Time Software Video/Audio Encoder library
 Summary(pl):	Programowa biblioteka kodera audio/wideo czasu rzeczywistego
@@ -18,6 +18,7 @@ Group(uk):	Б╕бл╕отеки
 URL:		http://zapping.sf.net/
 Source0:	http://prdownloads.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
 BuildRequires:	esound-devel
+BuildRequires:	XFree86-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	nasm
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -84,7 +85,6 @@ Koder audio/wideo MPEG-1 czasu rzeczywistego
 
 %prep
 %setup  -q
-#%patch0 -p1
 
 %build
 %configure2_13
@@ -95,18 +95,19 @@ cd ..
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} \
 	DESTDIR=$RPM_BUILD_ROOT \
 	bindir=%{_bindir} \
 	man1dir=%{_mandir}/man1 \
 	install
+
 gzip -9nf AUTHORS NEWS README ChangeLog
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post -p /sbin/ldconfig
-
 %postun -p /sbin/ldconfig
 
 %files
