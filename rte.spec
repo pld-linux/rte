@@ -8,12 +8,12 @@
 Summary:	Real Time Software Video/Audio Encoder library
 Summary(pl):	Programowa biblioteka kodera audio/wideo czasu rzeczywistego
 Name:		rte
-Version:	0.5.1
-Release:	3
+Version:	0.5.2
+Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
-# Source0-md5:	00ebfd8da3a8f5613265d1afc2bf6387
+# Source0-md5:	152d5d81169f0c9a543078543e354ebe
 URL:		http://zapping.sf.net/
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -58,6 +58,9 @@ Statyczna biblioteka rte.
 rm -f m4/{[!a]*,as}.m4
 # needed by automake
 install -d mp1e/{macros,vbi,devices,test}
+
+# workaround for test at the end of configure (to not return 1)
+touch mp1e/configure.in
 
 %build
 %{__gettextize}
