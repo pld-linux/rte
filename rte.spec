@@ -1,19 +1,16 @@
-%define		_rte_version	0.4
-# when upgrading, update the following from rte-%{version}/mp1e/configure.in
-%define		_mp1e_version	1.9.2
-
 Summary:	Real Time Software Video/Audio Encoder library
 Summary(pl):	Programowa biblioteka kodera audio/wideo czasu rzeczywistego
 Name:		rte
-Version:	%{_rte_version}
+Version:	0.4
 Release:	3
 License:	GPL
 Group:		Libraries
 Source0:	http://prdownloads.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
+Patch0:		rte-ac_fixes.patch
 URL:		http://zapping.sf.net/
-BuildRequires:	esound-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	alsa-lib-devel
+BuildRequires:	esound-devel
 BuildRequires:	nasm
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -52,7 +49,7 @@ Pliki programistyczne biblioteki rte.
 Summary:	Realtime MPEG-1 audio/video encoder
 Summary(pl):	Koder audio/wideo MPEG-1 czasu rzeczywistego
 Group:		Applications/Graphics
-Version:	%{_mp1e_version}
+Version:	1.9.2
 Requires:	rte
 
 %description -n mp1e
@@ -63,11 +60,22 @@ Koder audio/wideo MPEG-1 czasu rzeczywistego.
 
 %prep
 %setup  -q
+%patch0 -p1
 
 %build
-%configure2_13
+rm -f missing
+libtoolize --copy --force
+aclocal
+autoconf
+automake -a -c -f
+%configure
 cd mp1e
-%configure2_13
+rm -f missing
+libtoolize --copy --force
+aclocal -I %{_aclocaldir}/gnome
+autoconf
+automake -a -c -f
+%configure
 cd ..
 %{__make}
 
