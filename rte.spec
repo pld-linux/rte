@@ -2,7 +2,7 @@ Summary:	Real Time Software Video/Audio Encoder library
 Summary(pl):	Programowa biblioteka kodera audio/wideo czasu rzeczywistego
 Name:		rte
 Version:	0.5
-Release:	1
+Release:	2
 License:	GPL
 Group:		Libraries
 Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/zapping/%{name}-%{version}.tar.bz2
@@ -50,7 +50,13 @@ Statyczna biblioteka rte.
 %setup  -q
 
 %build
-%configure --without-divx4linux
+%configure \
+    --without-divx4linux \
+%ifnarch %{ix86}
+    --without-mp1e \
+    --without-ffmpeg
+%endif
+    
 %{__make}
 
 %install
