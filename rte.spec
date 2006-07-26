@@ -14,7 +14,7 @@ License:	GPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
 # Source0-md5:	6259cdff255af71c23a4576e7c5664a0
-URL:		http://zapping.sf.net/
+URL:		http://zapping.sourceforge.net/
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
