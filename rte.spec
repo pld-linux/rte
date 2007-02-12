@@ -6,7 +6,7 @@
 %undefine	with_mp1e
 %endif
 Summary:	Real Time Software Video/Audio Encoder library
-Summary(pl):	Programowa biblioteka kodera audio/wideo czasu rzeczywistego
+Summary(pl.UTF-8):   Programowa biblioteka kodera audio/wideo czasu rzeczywistego
 Name:		rte
 Version:	0.5.6
 Release:	1
@@ -26,31 +26,31 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Real Time Software Video/Audio Encoder library.
 
-%description -l pl
+%description -l pl.UTF-8
 Programowa biblioteka kodera audio/wideo czasu rzeczywistego.
 
 %package devel
 Summary:	rte library development files
-Summary(pl):	Pliki programistyczne biblioteki rte
+Summary(pl.UTF-8):   Pliki programistyczne biblioteki rte
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 rte library development files.
 
-%description devel -l pl
+%description devel -l pl.UTF-8
 Pliki programistyczne biblioteki rte.
 
 %package static
 Summary:	rte static library
-Summary(pl):	Biblioteka statyczna rte
+Summary(pl.UTF-8):   Biblioteka statyczna rte
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 rte static library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka rte.
 
 %prep
