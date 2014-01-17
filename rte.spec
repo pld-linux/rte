@@ -10,9 +10,9 @@ Summary(pl.UTF-8):	Programowa biblioteka kodera audio/wideo czasu rzeczywistego
 Name:		rte
 Version:	0.5.6
 Release:	2
-License:	GPL
+License:	GPL v2+
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
 # Source0-md5:	6259cdff255af71c23a4576e7c5664a0
 URL:		http://zapping.sourceforge.net/
 BuildRequires:	xorg-lib-libX11-devel
@@ -55,8 +55,8 @@ Statyczna biblioteka rte.
 
 %prep
 %setup -q
-#%patch -p1
-rm -f m4/{[!a]*,as}.m4
+# keep only aclocal-include.m4
+%{__rm} m4/{[!a]*,as}.m4
 # needed by automake
 install -d mp1e/{macros,vbi,devices,test}
 
@@ -98,15 +98,15 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/lib*.so.1
+%attr(755,root,root) %{_libdir}/librte.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/librte.so.1
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
-%{_includedir}/*.h
+%attr(755,root,root) %{_libdir}/librte.so
+%{_libdir}/librte.la
+%{_includedir}/librte.h
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/librte.a
