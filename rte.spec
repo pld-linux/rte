@@ -9,7 +9,7 @@ Summary:	Real Time Software Video/Audio Encoder library
 Summary(pl.UTF-8):	Programowa biblioteka kodera audio/wideo czasu rzeczywistego
 Name:		rte
 Version:	0.5.6
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/zapping/%{name}-%{version}.tar.bz2
